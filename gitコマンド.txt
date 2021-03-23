@@ -3,8 +3,14 @@ gitコマンド
 リモートリポジトリのクローン
 git clone [リポジトリのアドレス]
 
-ローカルリポジトリの反映
+ローカルリポジトリのステージング
 git add .
 
 git addを取り消す
 git rm -r --cached .
+
+コミット
+git commit -m "メッセージ"
+
+プッシュ
+git push origin [ブランチ名]
