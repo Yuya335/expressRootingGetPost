@@ -19,7 +19,18 @@
     </header>
     <div role="main">
       <p><%=msg %></p>
-      <p><a href="/other">Otherページに移動</a></p>
+      <form method="post" action="/other">
+        <div class="form-group">
+          <label for="msg">msg</label>
+          <input type="text" id="msg" name="msg" class="form-control" />
+        </div>
+        <input
+          type="submit"
+          value="送信(OtherページにPOSTでアクセス！！)"
+          class="btn-primary"
+        />
+      </form>
+      <p><a href="/other">OtherページにGETでアクセス！！</a></p>
     </div>
   </body>
 </html>
