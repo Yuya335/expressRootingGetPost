@@ -1,0 +1,10 @@
+gitコマンド
+
+リモートリポジトリのクローン
+git clone [リポジトリのアドレス]
+
+ローカルリポジトリの反映
+git add .
+
+git addを取り消す
+git rm -r --cached .
