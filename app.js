@@ -15,19 +15,28 @@ const other_page = fs.readFileSync("./other.ejs", "utf-8");
 let server = http.createServer(getFormClient);
 server.listen(3000);
 console.log("Server start!!");
-
 // メインプログラムここまで=======================
+
+// createServerに渡す関数
 function getFormClient(request, response) {
-  const url_parts = url.parse(request.url);
   // コンテンツ格納用変数
-  let content;
+  let content = "";
+  // URLを取得
+  const url_parts = url.parse(request.url, true);
+  // query格納用変数
+  let query = url_parts.query;
+  // queryのmsg格納用変数
+  let qs = "";
+  // query文字列が存在する場合代入
+  if (query.msg != undefined) {
+    qs += `あなたは${query.msg}と送りました。`;
+  }
+
   switch (url_parts.pathname) {
     case "/":
-      // contentのレンダリング
-      // ejs.render(レンダリングデータ, オブジェクト);
       content = ejs.render(index_page, {
         title: "Indexページです。",
-        content: "これはテンプレートを使ったIndexページです。",
+        msg: qs, //query文字列を渡す。
       });
       response.writeHead(200, { "Content-Type": "text/html" });
       response.write(content);
@@ -36,7 +45,7 @@ function getFormClient(request, response) {
     case "/other":
       content = ejs.render(other_page, {
         title: "Otherページです。",
-        content: "これは追加したOtherページです。",
+        msg: qs, //query文字列を渡す。
       });
       response.writeHead(200, { "Content-Type": "text/html" });
       response.write(content);
